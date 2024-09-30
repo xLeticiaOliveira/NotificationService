@@ -21,7 +21,7 @@ interface NotificationService {
 
 class NotificationServiceImpl implements NotificationService {
     private Gateway gateway;
-    
+
     public NotificationServiceImpl(Gateway gateway) {
         this.gateway = gateway;
     }

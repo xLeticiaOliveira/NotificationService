@@ -1,4 +1,3 @@
-
 class Gateway:
     # Already implemented
 
