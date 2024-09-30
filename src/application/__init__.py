@@ -1,7 +1,6 @@
 from typing import Dict
 
-from src.application.services.notification_service import \
-    NotificationServiceImpl
+from src.application.services.notification_service import NotificationServiceImpl
 from src.domain.email_type import EmailType
 from src.infrastructure.adapters.gateway import Gateway
 from src.infrastructure.adapters.local_user_data import UsersEmailData

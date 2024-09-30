@@ -9,4 +9,4 @@ sys.path.append(root_dir)
 
 
 class BaseConfTest(TestCase):
-    """"""
+    pass

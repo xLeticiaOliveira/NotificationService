@@ -25,7 +25,7 @@ To assist in the development, Github was used as the code review control system.
 
 To ensure good code readability and adherence to programming standards, the main linters in the market were used: flake8, mypy, black, isort, autoflake, and pylint.
 
-To assist in Pull Request reviews, a Git pipeline was configured to evaluate the code with these linters.
+To assist in Pull Request reviews, a Git pipeline was configured to evaluate the code with these linters and also tests.
 
 #### Development Environment
 Docker + Poetry was used to develop the project, as Docker ensures a consistent and isolated environment for development, while Poetry simplifies dependency management for the application.

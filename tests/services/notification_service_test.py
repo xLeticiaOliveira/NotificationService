@@ -1,9 +1,9 @@
 from datetime import datetime
 
-from src.application.services.exceptions.notification_service_exceptions import \
-    EmailLimitReachedException
-from src.application.services.notification_service import \
-    NotificationServiceImpl
+from src.application.services.exceptions.notification_service_exceptions import (
+    EmailLimitReachedException,
+)
+from src.application.services.notification_service import NotificationServiceImpl
 from src.domain.email_type import EmailType
 from src.infrastructure.adapters.gateway import Gateway
 from src.infrastructure.adapters.local_user_data import UsersEmailData
@@ -19,7 +19,7 @@ class TestNotificationService(BaseConfTest):
         super().setUp()
         self.service = NotificationServiceImpl(Gateway(), UsersEmailData())
 
-    def test_verify_rate_limit_ok(self) -> None:
+    def test_verify_rate_limit_ok(self):
         self.assertIsNone(
             self.service._verify_rate_limit(EmailType("news", 1, 1440), "user"),
         )
@@ -27,7 +27,7 @@ class TestNotificationService(BaseConfTest):
             self.service._verify_rate_limit(EmailType("status", 1, 1440), "user"),
         )
 
-    def test_verify_rate_limit_error(self) -> None:
+    def test_verify_rate_limit_error(self):
         self.service.users_email_data.users_email_data["other user"] = {
             "news": [datetime.now()],
         }
@@ -38,14 +38,16 @@ class TestNotificationService(BaseConfTest):
             "other user",
         )
 
-    def test_send_ok(self) -> None:
+    def test_send_ok(self):
         self.assertIsNone(
             self.service.send(
-                EmailType("other news", 1, 1440), "other user", "message",
+                EmailType("other news", 1, 1440),
+                "other user",
+                "message",
             ),
         )
 
-    def test_send_error(self) -> None:
+    def test_send_error(self):
         self.assertIsNone(
             self.service.send(
                 EmailType("other news error", 1, 1440),

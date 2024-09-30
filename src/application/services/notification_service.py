@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 from datetime import datetime
 
-from src.application.services.exceptions.notification_service_exceptions import \
-    EmailLimitReachedException
+from src.application.services.exceptions.notification_service_exceptions import (
+    EmailLimitReachedException,
+)
 from src.domain.email_type import EmailType
 from src.infrastructure.adapters.gateway import Gateway
 from src.infrastructure.adapters.local_user_data import UsersEmailData
