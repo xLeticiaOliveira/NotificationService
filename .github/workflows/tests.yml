@@ -37,6 +37,6 @@ jobs:
       env:
         POETRY_VIRTUALENVS_CREATE: true
 
-    - name: Unittest
+    - name: Pytest
       run: |
         poetry run pytest .
