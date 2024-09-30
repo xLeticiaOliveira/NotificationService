@@ -37,3 +37,14 @@ Docker + Poetry was used to develop the project, as Docker ensures a consistent 
 
 #### Project Execution
 To run the project, it is recommended to use Docker. The step-by-step instructions for executing the project are very simple.
+
+1. In the project's root folder, run the command:
+```bash
+docker build -t notification-service . && docker run -it --rm notification-service
+```
+2. Now, inside the container's bash, there are two options to run the project: Run the following command:
+```bash
+poetry run python .
+```
+
+- The program will print its outputs to stdout.

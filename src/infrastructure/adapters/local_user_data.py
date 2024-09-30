@@ -26,7 +26,6 @@ class UsersEmailData:
         email_type_name: str,
         minutes: int,
     ) -> int:
-        print(self.users_email_data)
         if (
             user_id not in self.users_email_data
             or email_type_name not in self.users_email_data[user_id]
