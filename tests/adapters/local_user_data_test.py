@@ -6,14 +6,14 @@ from tests.conftest import BaseConfTest
 
 class TestLocalUserData(BaseConfTest):
     @classmethod
-    def setUpClass(cls) -> None:
+    def setUpClass(cls):
         super().setUpClass()
 
-    def setUp(self) -> None:
+    def setUp(self):
         super().setUp()
         self.adapter = UsersEmailData()
 
-    def test_add_user_email_sent(self) -> None:
+    def test_add_user_email_sent(self):
         datetime_now = datetime.now()
         self.assertIsNone(
             self.adapter.add_user_email_sent("user", "name", datetime_now),
@@ -23,13 +23,13 @@ class TestLocalUserData(BaseConfTest):
             {"user": {"name": [datetime_now]}},
         )
 
-    def test_get_email_amount_in_past_minutes_inexistant(self) -> None:
+    def test_get_email_amount_in_past_minutes_inexistant(self):
         self.assertEqual(
             self.adapter.get_email_amount_in_past_minutes("new user", "new type", 10),
             0,
         )
 
-    def test_get_email_amount_in_past_minutes_existant(self) -> None:
+    def test_get_email_amount_in_past_minutes_existant(self):
         self.adapter.users_email_data = {"user": {"type": [datetime.now()]}}
         self.assertEqual(
             self.adapter.get_email_amount_in_past_minutes("user", "type", 10),
