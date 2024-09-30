@@ -1,0 +1,105 @@
+name: Linter
+on: [push]
+jobs:
+  black:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        echo ${{ github.base_ref }}
+        python -m pip install --upgrade pip
+        pip install black
+    - name: Run black check
+      run: black --check .
+
+  flake8:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        echo ${{ github.base_ref }}
+        python -m pip install --upgrade pip
+        pip install flake8
+    - name: Run flake8 check
+      run: flake8 --count --max-line-length=120 .
+
+  mypy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        echo ${{ github.base_ref }}
+        python -m pip install --upgrade pip
+        pip install mypy
+        pip install pydantic
+    - name: Run mypy check
+      run: mypy . --explicit-package-bases
+
+  isort:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        echo ${{ github.base_ref }}
+        python -m pip install --upgrade pip
+        pip install isort
+    - name: Run isort check
+      run: isort . -c
+
+  autoflake:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.11'
+    - name: Install dependencies
+      run: |
+        echo ${{ github.base_ref }}
+        python -m pip install --upgrade pip
+        pip install autoflake
+    - name: Run autoflake check
+      run: >
+        autoflake -c -i -r --in-place --remove-all-unused-imports --remove-duplicate-keys --remove-unused-variable --exclude tests .
+
+  pylint:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up Python 3.8
+      uses: actions/setup-python@v1
+      with:
+        python-version: 3.8
+    - name: Install dependencies
+      run: |
+        echo ${{ github.base_ref }}
+        python -m pip install --upgrade pip
+        pip install pylint
+        pip install pydantic
+    - name: Analysing the code with pylint
+      run: >
+        pylint --max-line-length=120
+        --disable=missing-function-docstring,missing-module-docstring,missing-class-docstring,no-else-return,too-few-public-methods,import-error
+        --ignore-paths=tests
+        $(git ls-files '*.py')
