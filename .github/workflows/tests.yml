@@ -39,5 +39,4 @@ jobs:
 
     - name: Unittest
       run: |
-        poetry run coverage run -m unittest -v
-        poetry run coverage report
+        poetry run pytest .
